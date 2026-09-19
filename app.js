@@ -1093,6 +1093,12 @@ async function init() {
   if (!(await readJSON(STORAGE_KEYS.consent))) {
     els.cookieBanner.hidden = false;
   }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+      saveDraftNow();
+    }
+  });
 }
 
 init();

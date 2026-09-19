@@ -1,0 +1,28 @@
+{
+  "name": "RR Orcamentos",
+  "short_name": "RR",
+  "description": "Sistema de orcamentos para marmores, granitos e servicos relacionados.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#eef7fb",
+  "theme_color": "#38bdf8",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Novo orcamento",
+      "short_name": "Novo",
+      "url": "/index.html",
+      "description": "Abrir o sistema para montar um novo orcamento."
+    }
+  ]
+}

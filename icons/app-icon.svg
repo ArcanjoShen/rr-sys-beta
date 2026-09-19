@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="RR Orcamentos">
+  <rect width="512" height="512" rx="112" fill="#38bdf8"/>
+  <path d="M96 114h320c30 0 54 24 54 54v176c0 30-24 54-54 54H96c-30 0-54-24-54-54V168c0-30 24-54 54-54Z" fill="#ffffff" opacity=".24"/>
+  <path d="M140 168h104c54 0 86 29 86 75 0 30-14 53-39 65l49 82h-61l-42-72h-39v72h-58V168Zm98 103c22 0 34-10 34-28 0-19-12-29-34-29h-40v57h40Z" fill="#ffffff"/>
+  <path d="M286 168h86c47 0 74 25 74 65 0 26-12 45-33 56l40 101h-57l-35-88h-21v88h-54V168Zm80 88c18 0 28-8 28-23 0-16-10-24-28-24h-26v47h26Z" fill="#e0f7ff"/>
+  <path d="M118 410h276" stroke="#e0f7ff" stroke-width="18" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,49 @@
+{
+  "materials": [
+    {
+      "id": "marmore-preto-sao-gabriel",
+      "name": "Marmore Preto Sao Gabriel",
+      "unit": "m2",
+      "price": 600
+    },
+    {
+      "id": "marmore-branco-prime",
+      "name": "Marmore Branco Prime",
+      "unit": "m2",
+      "price": 720
+    },
+    {
+      "id": "granito-verde-ubatuba",
+      "name": "Granito Verde Ubatuba",
+      "unit": "m2",
+      "price": 430
+    },
+    {
+      "id": "granito-branco-dallas",
+      "name": "Granito Branco Dallas",
+      "unit": "m2",
+      "price": 520
+    },
+    {
+      "id": "quartzo-branco",
+      "name": "Quartzo Branco",
+      "unit": "m2",
+      "price": 980
+    }
+  ],
+  "services": {
+    "polishingPerM2": 80,
+    "installationPerM2": 120,
+    "edgeFinishPerMeter": 45,
+    "cutoutEach": 150,
+    "holeEach": 35
+  },
+  "defaults": {
+    "validityDays": 7,
+    "deliveryDays": 15,
+    "paymentTerms": "50% de entrada e 50% na entrega",
+    "warranty": "90 dias contra defeitos de instalacao",
+    "infinitePayFeePercent": 0,
+    "maxInstallments": 1
+  }
+}

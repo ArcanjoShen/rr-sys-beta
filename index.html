@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#38bdf8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="RR Orcamentos">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>RR Orcamentos</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/app-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icons/app-icon.svg">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-frame">
+      <header class="app-header">
+        <div class="brand-block">
+          <span class="brand-mark"><img src="logo.png" alt=""></span>
+          <div>
+            <p class="eyebrow">Sistema comercial</p>
+            <h1>Orcamentos de marmores e granitos</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="save-state" id="saveState">Pronto</span>
+          <button class="ghost install-action" id="installApp" type="button" hidden>Instalar app</button>
+          <button class="ghost" id="newQuote" type="button">Novo</button>
+          <button class="ghost" id="saveQuote" type="button">Salvar</button>
+          <button class="ghost" id="downloadPdf" type="button">Baixar PDF</button>
+          <button class="ghost" id="shareWhatsApp" type="button">WhatsApp</button>
+          <button id="printQuote" type="button">Imprimir proposta</button>
+        </div>
+      </header>
+
+      <nav class="app-tabs" aria-label="Paginas do sistema">
+        <button class="tab-button active" data-view="quote" type="button">Orcamento</button>
+        <button class="tab-button" data-view="items" type="button">Pecas</button>
+        <button class="tab-button" data-view="clients" type="button">Clientes</button>
+        <button class="tab-button" data-view="settings" type="button">Configuracoes</button>
+        <button class="tab-button" data-view="saved" type="button">Salvos</button>
+      </nav>
+      <nav class="mobile-flow" aria-label="Fluxo rapido">
+        <button class="flow-button active" data-view="quote" type="button">1 Cliente</button>
+        <button class="flow-button" data-view="items" type="button">2 Pecas</button>
+        <button class="flow-button" data-view="quote" type="button">3 Fechamento</button>
+        <button class="flow-button" data-view="saved" type="button">4 Salvos</button>
+      </nav>
+
+      <main class="app-layout">
+        <section class="workbench">
+          <section class="view-panel active" data-view-panel="quote">
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Dados comerciais</p>
+                  <h2>Proposta</h2>
+                </div>
+                <span class="panel-chip" id="quoteStatusChip">Rascunho</span>
+              </div>
+
+              <div class="form-grid four">
+                <label>
+                  Numero
+                  <input data-field="quoteNumber" type="text" placeholder="ORC-0001">
+                </label>
+                <label>
+                  Status
+                  <select data-field="quoteStatus">
+                    <option value="Rascunho">Rascunho</option>
+                    <option value="Enviado">Enviado</option>
+                    <option value="Aprovado">Aprovado</option>
+                    <option value="Recusado">Recusado</option>
+                  </select>
+                </label>
+                <label>
+                  Emissao
+                  <input data-field="issueDate" type="date">
+                </label>
+                <label>
+                  Validade em dias
+                  <input data-field="quoteValidityDays" type="number" min="1" step="1" placeholder="7">
+                </label>
+              </div>
+
+              <div class="form-grid four">
+                <label>
+                  Data de medicao
+                  <input data-field="measurementDate" type="date">
+                </label>
+                <label>
+                  Prazo de entrega
+                  <input data-field="deliveryDays" type="number" min="1" step="1" placeholder="15">
+                </label>
+                <label class="toggle-card">
+                  <input data-field="useBusinessDays" type="checkbox">
+                  Contar dias uteis
+                </label>
+                <label>
+                  Entrega prevista
+                  <input data-field="deliveryDate" type="date" readonly>
+                </label>
+              </div>
+
+              <div class="form-grid two">
+                <label>
+                  Forma de pagamento
+                  <input data-field="paymentTerms" type="text" placeholder="Ex: 50% entrada + 50% entrega">
+                </label>
+                <label>
+                  Prazo solicitado pelo cliente
+                  <input data-field="deadline" type="text" placeholder="Ex: antes de 20/06">
+                </label>
+              </div>
+
+              <label>
+                Observacoes comerciais
+                <textarea data-field="quoteNotes" rows="3" placeholder="Ex: valores sujeitos a conferencia de medidas e disponibilidade do material."></textarea>
+              </label>
+            </section>
+
+            <section class="panel form-grid two split-panel">
+              <div class="group">
+                <div class="section-head compact">
+                  <div>
+                    <p class="eyebrow">Cadastro</p>
+                    <h2>Empresa</h2>
+                  </div>
+                  <button class="ghost small" id="saveCompanyProfile" type="button">Salvar empresa</button>
+                </div>
+                <label>
+                  Nome da empresa
+                  <input data-field="companyName" type="text" placeholder="Ex: RR Marmores">
+                </label>
+                <label>
+                  Logo da empresa
+                  <input data-field="companyLogo" type="text" placeholder="URL ou caminho da imagem" value="logo.png">
+                </label>
+                <label>
+                  Endereco
+                  <input data-field="companyAddress" type="text" placeholder="Rua, numero, cidade">
+                </label>
+                <div class="form-grid two">
+                  <label>
+                    Vendedor
+                    <input data-field="seller" type="text" placeholder="Nome">
+                  </label>
+                  <label>
+                    Telefone
+                    <input data-field="companyPhone" type="tel" placeholder="(00) 00000-0000">
+                  </label>
+                </div>
+                <div class="form-grid two">
+                  <label>
+                    CNPJ
+                    <input data-field="companyDocument" type="text" placeholder="00.000.000/0000-00">
+                  </label>
+                  <label>
+                    E-mail
+                    <input data-field="companyEmail" type="email" placeholder="contato@empresa.com">
+                  </label>
+                </div>
+              </div>
+
+              <div class="group">
+                <div class="section-head compact">
+                  <div>
+                    <p class="eyebrow">Atendimento</p>
+                    <h2>Cliente</h2>
+                  </div>
+                  <button class="ghost small" id="saveClient" type="button">Salvar cliente</button>
+                </div>
+                <label>
+                  Nome
+                  <input data-field="clientName" type="text" placeholder="Cliente">
+                </label>
+                <label>
+                  Endereco da obra
+                  <input data-field="clientAddress" type="text" placeholder="Local da instalacao">
+                </label>
+                <div class="form-grid two">
+                  <label>
+                    Telefone
+                    <input data-field="clientPhone" type="tel" placeholder="(00) 00000-0000">
+                  </label>
+                  <label>
+                    CPF/CNPJ
+                    <input data-field="clientDocument" type="text" placeholder="Documento">
+                  </label>
+                </div>
+                <label>
+                  Ambiente
+                  <input data-field="projectArea" type="text" placeholder="Ex: cozinha, banheiro, area gourmet">
+                </label>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Interno</p>
+                  <h2>Ajustes de fechamento</h2>
+                </div>
+                <span class="panel-chip muted">Nao aparece para o cliente</span>
+              </div>
+              <div class="form-grid four">
+                <label>
+                  Desconto
+                  <input data-field="discountValue" type="number" min="0" step="0.01" placeholder="0,00">
+                </label>
+                <label>
+                  Acrescimo / frete
+                  <input data-field="extraValue" type="number" min="0" step="0.01" placeholder="0,00">
+                </label>
+                <label class="toggle-card">
+                  <input data-field="useManualTotal" type="checkbox">
+                  Usar valor fechado
+                </label>
+                <label>
+                  Total manual
+                  <input data-field="manualTotal" type="number" min="0" step="0.01" placeholder="0,00" disabled>
+                </label>
+              </div>
+              <div class="form-grid two">
+                <label class="toggle-card">
+                  <input data-field="showDetailedProposal" type="checkbox">
+                  Proposta detalhada
+                </label>
+              </div>
+            </section>
+          </section>
+
+          <section class="view-panel" data-view-panel="items">
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Medidas</p>
+                  <h2>Pecas do orcamento</h2>
+                  <p>Escolha o modelo da peca e preencha medidas em metros. Componentes como saia, espelho, guarnicao e virada entram apenas quando voce informar quantidade e medida.</p>
+                </div>
+                <div class="actions">
+                  <label class="file-button">
+                    Importar CSV
+                    <input id="importFile" type="file" accept=".csv,.json">
+                  </label>
+                  <button id="addItem" type="button">Adicionar peca</button>
+                </div>
+              </div>
+
+              <div class="template-actions" aria-label="Modelos rapidos de pecas">
+                <button class="ghost small" data-add-template="pia" type="button">Pia</button>
+                <button class="ghost small" data-add-template="ilha" type="button">Ilha</button>
+                <button class="ghost small" data-add-template="nicho" type="button">Nicho</button>
+                <button class="ghost small" data-add-template="balcao" type="button">Balcao</button>
+                <button class="ghost small" data-add-template="bancada" type="button">Bancada</button>
+                <button class="ghost small" data-add-template="empena" type="button">Empena</button>
+                <button class="ghost small" data-add-template="pe-ilha" type="button">Pe de ilha</button>
+                <button class="ghost small" data-add-template="soleira" type="button">Soleira</button>
+              </div>
+
+              <div class="items-shell">
+                <table class="items-table">
+                  <thead>
+                    <tr>
+                      <th>Tipo / peca</th>
+                      <th>Material</th>
+                      <th>Base</th>
+                      <th>Qtd.</th>
+                      <th>Componentes</th>
+                      <th>Acabamentos</th>
+                      <th>Total</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="itemsBody"></tbody>
+                </table>
+              </div>
+              <p class="hint" id="importNote">CSV recomendado: tipo, peca, material, largura, comprimento, quantidade, saia_qtd, saia_altura, espelho_qtd, espelho_altura, guarnicao_qtd, guarnicao_m, guarnicao_largura, virada_qtd, virada_m, virada_altura, pes, extra_m2, borda, recortes, furos, observacao.</p>
+            </section>
+          </section>
+
+          <section class="view-panel" data-view-panel="clients">
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Cadastro comercial</p>
+                  <h2>Clientes</h2>
+                  <p>Salve clientes frequentes e carregue os dados no orcamento quando precisar.</p>
+                </div>
+                <button id="saveClientFromTab" type="button">Salvar cliente atual</button>
+              </div>
+              <label class="saved-search">
+                Buscar cliente
+                <input id="clientSearch" type="search" placeholder="Nome, telefone, documento, endereco ou ambiente">
+              </label>
+              <div class="clients-list" id="clientsList"></div>
+            </section>
+          </section>
+
+          <section class="view-panel" data-view-panel="settings">
+            <section class="panel form-grid two split-panel">
+              <div class="group">
+                <div class="section-head compact">
+                  <div>
+                    <p class="eyebrow">Padroes</p>
+                    <h2>Servicos e prazos</h2>
+                  </div>
+                  <button class="ghost small" id="saveSettings" type="button">Salvar configuracoes</button>
+                </div>
+                <div class="form-grid two">
+                  <label>
+                    Instalacao por m2
+                    <input data-service="installationPerM2" type="number" min="0" step="0.01">
+                  </label>
+                  <label>
+                    Polimento por m2
+                    <input data-service="polishingPerM2" type="number" min="0" step="0.01">
+                  </label>
+                </div>
+                <div class="form-grid two">
+                  <label>
+                    Acabamento de borda por metro
+                    <input data-service="edgeFinishPerMeter" type="number" min="0" step="0.01">
+                  </label>
+                  <label>
+                    Recorte por unidade
+                    <input data-service="cutoutEach" type="number" min="0" step="0.01">
+                  </label>
+                </div>
+                <div class="form-grid two">
+                  <label>
+                    Furo por unidade
+                    <input data-service="holeEach" type="number" min="0" step="0.01">
+                  </label>
+                  <label>
+                    Garantia padrao
+                    <input data-default="warranty" type="text" placeholder="Ex: 90 dias">
+                  </label>
+                </div>
+                <div class="form-grid two">
+                  <label>
+                    Taxa Infinite Pay (%)
+                    <input data-default="infinitePayFeePercent" type="number" min="0" step="0.01" placeholder="Ex: 18.99">
+                  </label>
+                  <label>
+                    Parcelas sem juros
+                    <input data-default="maxInstallments" type="number" min="1" step="1" placeholder="Ex: 12">
+                  </label>
+                </div>
+                <div class="form-grid two">
+                  <label>
+                    Validade padrao
+                    <input data-default="validityDays" type="number" min="1" step="1">
+                  </label>
+                  <label>
+                    Prazo padrao
+                    <input data-default="deliveryDays" type="number" min="1" step="1">
+                  </label>
+                </div>
+                <label>
+                  Pagamento padrao
+                  <input data-default="paymentTerms" type="text" placeholder="Ex: 50% entrada + 50% entrega">
+                </label>
+              </div>
+
+              <div class="group">
+                <div class="section-head compact">
+                  <div>
+                    <p class="eyebrow">Privacidade</p>
+                    <h2>Dados no navegador</h2>
+                  </div>
+                </div>
+                <div class="info-box">
+                  <strong>Sem backend nesta versao.</strong>
+                  <span>Empresa, materiais, rascunho e orcamentos salvos ficam no navegador usando localStorage. O cookie guarda apenas o consentimento e um marcador de perfil salvo.</span>
+                </div>
+                <div class="actions stacked-actions">
+                  <button class="ghost" id="exportQuote" type="button">Exportar JSON</button>
+                  <button class="ghost danger" id="clearDraft" type="button">Limpar rascunho</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Catalogo</p>
+                  <h2>Materiais</h2>
+                  <p>Edite precos e unidades. Essas alteracoes ficam salvas no navegador.</p>
+                </div>
+              </div>
+
+              <div class="material-create">
+                <label>
+                  Material
+                  <input id="newMaterialName" type="text" placeholder="Ex: Granito Branco Dallas">
+                </label>
+                <label>
+                  Unidade
+                  <select id="newMaterialUnit">
+                    <option value="m2">m2</option>
+                    <option value="un">un</option>
+                    <option value="metro">metro</option>
+                  </select>
+                </label>
+                <label>
+                  Valor
+                  <input id="newMaterialPrice" type="number" min="0" step="0.01" placeholder="0,00">
+                </label>
+                <button id="addMaterial" type="button">Adicionar material</button>
+              </div>
+
+              <div class="materials-list" id="materialsList"></div>
+            </section>
+          </section>
+
+          <section class="view-panel" data-view-panel="saved">
+            <section class="panel">
+              <div class="section-head">
+                <div>
+                  <p class="eyebrow">Historico local</p>
+                  <h2>Orcamentos salvos</h2>
+                  <p>Salvo somente neste navegador. Para backup, exporte JSON.</p>
+                </div>
+              </div>
+              <label class="saved-search">
+                Buscar orcamento
+                <input id="savedSearch" type="search" placeholder="Cliente, telefone, numero, status ou ambiente">
+              </label>
+              <div class="saved-list" id="savedQuotesList"></div>
+            </section>
+          </section>
+        </section>
+
+        <aside class="summary-card" aria-label="Resumo do orcamento">
+          <div class="summary-head">
+            <div>
+              <p class="eyebrow">Resumo</p>
+              <h2 id="previewCompany">Sua empresa</h2>
+              <p id="previewCompanyMeta">Endereco e contato</p>
+            </div>
+            <span id="quoteDate">--</span>
+          </div>
+
+          <dl class="summary-grid">
+            <div>
+              <dt>Orcamento</dt>
+              <dd id="previewQuoteNumber">--</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd id="previewStatus">Rascunho</dd>
+            </div>
+            <div>
+              <dt>Cliente</dt>
+              <dd id="previewClient">Nao informado</dd>
+            </div>
+            <div>
+              <dt>Entrega</dt>
+              <dd id="previewDelivery">Nao definida</dd>
+            </div>
+            <div>
+              <dt>Pagamento</dt>
+              <dd id="previewPayment">Nao informado</dd>
+            </div>
+            <div>
+              <dt>Validade</dt>
+              <dd id="previewValidity">Nao informada</dd>
+            </div>
+          </dl>
+
+          <div class="totals-card">
+            <div>
+              <span>Area total</span>
+              <strong id="totalArea">0,00 m2</strong>
+            </div>
+            <div>
+              <span>Materiais</span>
+              <strong id="materialTotal">R$ 0,00</strong>
+            </div>
+            <div>
+              <span>Servicos</span>
+              <strong id="serviceTotal">R$ 0,00</strong>
+            </div>
+            <div>
+              <span>Desconto</span>
+              <strong id="discountTotal">R$ 0,00</strong>
+            </div>
+            <div>
+              <span>Acrescimos</span>
+              <strong id="extraTotal">R$ 0,00</strong>
+            </div>
+            <div id="installmentRow" hidden>
+              <span>Parcelamento</span>
+              <strong id="installmentInfo">A vista</strong>
+            </div>
+            <div class="grand-total">
+              <span>Total final</span>
+              <strong id="grandTotal">R$ 0,00</strong>
+            </div>
+          </div>
+
+          <div class="mini-list" id="quoteLines"></div>
+        </aside>
+      </main>
+
+      <nav class="mobile-action-bar" aria-label="Acoes principais no celular">
+        <button data-mobile-action="items" type="button">Pecas</button>
+        <button data-mobile-action="add-item" type="button">+ Peca</button>
+        <button data-mobile-action="save" type="button">Salvar</button>
+        <button data-mobile-action="pdf" type="button">PDF</button>
+      </nav>
+    </div>
+
+    <section class="print-area" id="printArea" aria-hidden="true"></section>
+
+    <div class="cookie-banner" id="cookieBanner" hidden>
+      <div>
+        <strong>Dados locais</strong>
+        <span>Este sistema salva rascunhos, empresa e configuracoes neste navegador.</span>
+      </div>
+      <button id="acceptCookies" type="button">Entendi</button>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("service-worker.js").catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

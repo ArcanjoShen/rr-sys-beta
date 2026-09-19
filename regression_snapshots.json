@@ -1,0 +1,158 @@
+[
+  {
+    "id": "T01_ComplexPiece",
+    "description": "Piece with skirts, backsplash, trim, cutouts and holes",
+    "inputs": {
+      "items": [
+        {
+          "materialId": "m1",
+          "width": 1,
+          "length": 2,
+          "skirtCount": 2,
+          "skirtHeight": 0.1,
+          "backsplashCount": 1,
+          "backsplashHeight": 0.1,
+          "trimCount": 1,
+          "trimMeters": 2,
+          "trimWidth": 0.05,
+          "turnCount": 0,
+          "turnMeters": 0,
+          "turnHeight": 0,
+          "extraArea": 0,
+          "quantity": 1,
+          "polishing": true,
+          "installation": true,
+          "edgeMeters": 4,
+          "cutouts": 2,
+          "holes": 1
+        }
+      ],
+      "fields": {
+        "discountValue": 0,
+        "extraValue": 0,
+        "useManualTotal": false,
+        "manualTotal": 0
+      }
+    },
+    "output": {
+      "totalArea": 2.7,
+      "grandTotal": 2728.5
+    }
+  },
+  {
+    "id": "T02_FinancialCombo",
+    "description": "Subtotal (600) - Disc (50) + Extra (20) + 2% Fee",
+    "inputs": {
+      "items": [
+        {
+          "materialId": "m1",
+          "width": 1,
+          "length": 1,
+          "quantity": 1,
+          "polishing": false,
+          "installation": false,
+          "edgeMeters": 0,
+          "cutouts": 0,
+          "holes": 0
+        }
+      ],
+      "fields": {
+        "discountValue": 50,
+        "extraValue": 20,
+        "useManualTotal": false,
+        "manualTotal": 0
+      }
+    },
+    "output": {
+      "totalArea": 1,
+      "grandTotal": 581.4
+    }
+  },
+  {
+    "id": "T03_ManualTotal",
+    "description": "Manual Total (1000) + 2% Fee",
+    "inputs": {
+      "items": [
+        {
+          "materialId": "m1",
+          "width": 1,
+          "length": 1,
+          "quantity": 1,
+          "polishing": false,
+          "installation": false,
+          "edgeMeters": 0,
+          "cutouts": 0,
+          "holes": 0
+        }
+      ],
+      "fields": {
+        "discountValue": 0,
+        "extraValue": 0,
+        "useManualTotal": true,
+        "manualTotal": 1000
+      }
+    },
+    "output": {
+      "totalArea": 1,
+      "grandTotal": 1020
+    }
+  },
+  {
+    "id": "T04_InvalidInputs",
+    "description": "Testing inputs like '10abc', empty, and non-numeric",
+    "inputs": {
+      "items": [
+        {
+          "materialId": "m1",
+          "width": "10abc",
+          "length": "2,5",
+          "quantity": "1",
+          "polishing": false,
+          "installation": false,
+          "edgeMeters": "zero",
+          "cutouts": "",
+          "holes": "none"
+        }
+      ],
+      "fields": {
+        "discountValue": "invalid",
+        "extraValue": " ",
+        "useManualTotal": false,
+        "manualTotal": "NaN"
+      }
+    },
+    "output": {
+      "totalArea": 0,
+      "grandTotal": 0
+    }
+  },
+  {
+    "id": "T05_QuantityScaling",
+    "description": "Quantity 3: verify scaling of area and services",
+    "inputs": {
+      "items": [
+        {
+          "materialId": "m1",
+          "width": 1,
+          "length": 1,
+          "quantity": 3,
+          "polishing": true,
+          "installation": true,
+          "edgeMeters": 4,
+          "cutouts": 1,
+          "holes": 1
+        }
+      ],
+      "fields": {
+        "discountValue": 0,
+        "extraValue": 0,
+        "useManualTotal": false,
+        "manualTotal": 0
+      }
+    },
+    "output": {
+      "totalArea": 3,
+      "grandTotal": 2820.3
+    }
+  }
+]

@@ -56,7 +56,7 @@ button,
   font-size: 0.9rem;
   font-weight: 800;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 14px;
   transition: background 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
   white-space: nowrap;
@@ -75,7 +75,7 @@ button:active,
 
 button.small {
   font-size: 0.8rem;
-  min-height: 34px;
+  min-height: 44px;
   padding: 0 10px;
 }
 
@@ -409,7 +409,7 @@ textarea {
   border: 1px solid #c8dfea;
   border-radius: 8px;
   color: var(--ink);
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 10px;
   width: 100%;
 }
@@ -446,7 +446,7 @@ input:disabled {
   color: var(--ink);
   display: flex;
   gap: 9px;
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 10px;
 }
 
@@ -740,6 +740,10 @@ input:disabled {
   display: grid;
   gap: 8px;
   padding: 14px;
+  position: sticky;
+  bottom: 80px;
+  z-index: 10;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
 }
 
 .totals-card div {
@@ -897,7 +901,7 @@ input:disabled {
     border: 1px solid var(--line);
     color: var(--muted);
     font-size: 0.72rem;
-    min-height: 34px;
+    min-height: 44px;
     padding: 0 6px;
   }
 
@@ -1097,7 +1101,7 @@ input:disabled {
   .mobile-action-bar button {
     border-radius: 8px;
     font-size: 0.78rem;
-    min-height: 40px;
+    min-height: 44px;
     padding: 0 6px;
   }
 }
